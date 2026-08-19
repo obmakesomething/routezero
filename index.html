@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTVJZ0V80C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TTVJZ0V80C');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Routezero — Applied Intelligence &amp; Studio Engineering</title>
+  <meta name="description" content="Routezero is an applied intelligence and design automation engineering studio founded by Daeyoung “OB” Lee — architecting resilient systems, design automation pipelines, and digital products.">
+  <meta name="keywords" content="Routezero, 루트제로, Daeyoung Lee, OB Lee, Applied AI, Design Automation, Software Architecture, Hand-axe">
+  <meta name="author" content="Routezero / Daeyoung “OB” Lee">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://routezero-puce.vercel.app">
+  <meta property="og:title" content="Routezero — Applied Intelligence &amp; Studio Engineering">
+  <meta property="og:description" content="Architecting resilient systems, design automation pipelines, and digital products.">
+  <meta property="og:image" content="/assets/routezero_logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Routezero — Applied Intelligence &amp; Studio Engineering">
+  <meta name="twitter:description" content="Architecting resilient systems, design automation pipelines, and digital products.">
+  <meta name="twitter:image" content="/assets/routezero_logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+  <!-- Fonts: Outfit, JetBrains Mono, Pretendard / Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+
+  <!-- Background Grids & Ambient Glow -->
+  <div class="bg-texture" aria-hidden="true"></div>
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Toast for copying email -->
+  <div id="toast" class="copy-toast" role="status" aria-live="polite">이메일 주소가 복사되었습니다!</div>
+
+  <div class="app-container">
+    
+    <!-- LEFT PANEL: Sticky Brand & Navigation (Desktop Sticky / Mobile Responsive) -->
+    <aside class="panel-left">
+      <div class="brand-header">
+        <a href="#" class="header-logo-row" aria-label="Routezero Home">
+          <img src="/assets/logo.svg" alt="Routezero Logo" class="header-logo-svg">
+        </a>
+
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          ACTIVE · ROUTE 0 STUDIO
+        </div>
+        
+        <p class="header-bio">
+          <strong>Routezero (루트제로)</strong>는 인공지능 엔지니어링, 도메인 데이터 파이프라인, 그리고 고품질 인터랙션 디자인을 결합하여 복잡한 비즈니스 문제를 해결하고 새로운 프로덕트를 창조하는 엔지니어링 스튜디오입니다.
+        </p>
+        
+        <p class="header-tagline">
+          Design automation pipelines, software architecture, and digital ventures.
+        </p>
+
+        <!-- Desktop Navigation Links (Scroll Spy) -->
+        <nav class="nav-links" aria-label="Desktop Page Sections">
+          <a href="#design" class="nav-item active">
+            <span class="nav-line"></span>Design &amp; Automation
+          </a>
+          <a href="#archive" class="nav-item">
+            <span class="nav-line"></span>Archive
+          </a>
+          <a href="#about" class="nav-item">
+            <span class="nav-line"></span>About
+          </a>
+        </nav>
+      </div>
+
+      <!-- Social & Contact Badges -->
+      <div class="contact-links">
+        <!-- Email Copy Badge -->
+        <button class="social-badge" id="email-badge" type="button" title="Click to copy email">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          <span>Email</span>
+        </button>
+
+        <!-- GitHub -->
+        <a href="https://github.com/obmakesomething" target="_blank" rel="noopener noreferrer" class="social-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/oblee2" target="_blank" rel="noopener noreferrer" class="social-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+
+        <!-- Hand-axe Link -->
+        <a href="https://hand-axe.com" target="_blank" rel="noopener noreferrer" class="social-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span>Hand-axe</span>
+        </a>
+
+        <!-- Medium -->
+        <a href="https://medium.com/@daepop98" target="_blank" rel="noopener noreferrer" class="social-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42s-3.38-2.88-3.38-6.42 1.51-6.42 3.38-6.42 3.38 2.88 3.38 6.42zM24 12c0 3.17-.53 5.75-1.19 5.75s-1.19-2.58-1.19-5.75.53-5.75 1.19-5.75S24 8.83 24 12z"/>
+          </svg>
+          <span>Medium</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- RIGHT PANEL: Scrolling content sections -->
+    <main class="panel-right">
+
+      <!-- Mobile Sticky Navigation Bar (Visible only on tablets & mobile screens) -->
+      <nav class="mobile-nav-bar" aria-label="Mobile Navigation">
+        <div class="mobile-nav-track">
+          <a href="#design" class="mobile-nav-item active">Design &amp; Automation</a>
+          <a href="#archive" class="mobile-nav-item">Archive</a>
+          <a href="#about" class="mobile-nav-item">About</a>
+        </div>
+      </nav>
+      
+      <!-- Section 1: Design & Automation -->
+      <section id="design">
+        <h2 class="section-title">Design &amp; Automation</h2>
+        <div class="section-card">
+          <p class="section-desc">
+            정교한 에디토리얼 그리드와 타이포그래피 시스템, Adobe Illustrator/UXP 스크립팅 및 헤드리스 그래픽 파이프라인을 구축하여 반복적인 제작 공정을 소프트웨어 수준으로 확장하고 고품질 인터랙션을 구현합니다.
+          </p>
+
+          <div class="feature-pills">
+            <div class="feature-pill">
+              <span class="feature-dot"></span>
+              <strong>Editorial Grid &amp; Layout Systems</strong>
+              <p>엄격한 조판 비례와 구조적 정밀함을 기반으로 한 미니멀리즘 인터페이스 설계</p>
+            </div>
+            <div class="feature-pill">
+              <span class="feature-dot"></span>
+              <strong>Creative Automation &amp; Scripting</strong>
+              <p>Adobe UXP, ExtendScript 및 CLI 파이프라인을 통한 벡터·문서 자동화 엔지니어링</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Archive -->
+      <section id="archive">
+        <h2 class="section-title">Archive</h2>
+        <div class="archive-table-container">
+          <table class="archive-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Project / System</th>
+                <th>Domain</th>
+                <th>Stack</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-year">2026</td>
+                <td class="project-name">Routezero Studio Core</td>
+                <td class="col-domain">Venture Studio</td>
+                <td class="col-stack">Static Web, Edge, GA4</td>
+                <td><span class="badge-live">● Live</span></td>
+              </tr>
+              <tr>
+                <td class="col-year">2026</td>
+                <td class="project-name">Design Systems &amp; Automation</td>
+                <td class="col-domain">Creative Tooling</td>
+                <td class="col-stack">Adobe UXP, TypeScript</td>
+                <td><span class="badge-live">● Active</span></td>
+              </tr>
+              <tr>
+                <td class="col-year">2025</td>
+                <td class="project-name">Hand-axe.com</td>
+                <td class="col-domain">Digital Portfolio</td>
+                <td class="col-stack">Vanilla CSS, JavaScript, Vercel</td>
+                <td><span class="badge-live">● Live</span></td>
+              </tr>
+              <tr>
+                <td class="col-year">2024</td>
+                <td class="project-name">Looproof Media</td>
+                <td class="col-domain">Brand &amp; Publishing</td>
+                <td class="col-stack">Static Web, Tailwind</td>
+                <td><span class="badge-live">● Archived</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 3: About -->
+      <section id="about">
+        <h2 class="section-title">About Routezero</h2>
+        <div class="section-card">
+          <div class="about-details">
+            <p>
+              안녕하세요, <strong>루트제로(Routezero)</strong>는 기술과 디자인, 그리고 시스템 아키텍처의 경계에서 동작하는 디지털 솔루션을 만드는 엔지니어링 스튜디오입니다.
+            </p>
+            <p>
+              복잡한 알고리즘과 본질적인 사용자 요구사항 사이의 간극을 좁히며, 고도로 감사 가능(Auditable)하고 직관적인 실행 체계를 구축합니다. 디자인 파이프라인 자동화부터 견고한 웹 플랫폼까지, 기술을 인간의 창의적 역량을 극대화하는 가장 날카로운 도구로 바라봅니다.
+            </p>
+            <p>
+              대한민국 서울(Seoul)을 거점으로 활동하며, 0에서 1을 넘어 지속 가능한 가치를 창출하는 디지털 시스템을 설계합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer (Seoul Live Clock & Global Badges) -->
+      <footer class="footer">
+        <div class="footer-top">
+          <div class="footer-info">
+            <div class="footer-name-row">
+              <div class="footer-name">Routezero</div>
+            </div>
+            <div class="footer-loc">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Seoul, Republic of Korea
+            </div>
+            <div class="footer-clock-box">
+              <span class="clock-pulse"></span>
+              <span id="seoul-clock">SEOUL: --:--:-- KST</span>
+            </div>
+          </div>
+          
+          <div class="footer-links-grid">
+            <a href="mailto:krrootzero@gmail.com" class="footer-link" id="footer-email-link" title="Click to copy email">
+              krrootzero@gmail.com
+            </a>
+            <a href="https://hand-axe.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+              hand-axe.com
+            </a>
+            <a href="https://github.com/obmakesomething" target="_blank" rel="noopener noreferrer" class="footer-link">
+              github.com/obmakesomething
+            </a>
+            <a href="https://linkedin.com/in/oblee2" target="_blank" rel="noopener noreferrer" class="footer-link">
+              linkedin.com/in/oblee2
+            </a>
+            <a href="https://medium.com/@daepop98" target="_blank" rel="noopener noreferrer" class="footer-link" style="grid-column: 1 / -1;">
+              medium.com/@daepop98
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>&copy; 2026 Routezero. All rights reserved.</div>
+          <div>Applied Intelligence &amp; Engineering.</div>
+          <button class="back-to-top" id="back-to-top" type="button" aria-label="Scroll to top">Top ↑</button>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Client JavaScript -->
+  <script src="/scripts/app.js"></script>
+</body>
+</html>
