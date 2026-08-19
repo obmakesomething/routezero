@@ -1,19 +1,23 @@
 # ROUTEZERO Web Platform
 
-Official website for **ROUTEZERO (루트제로)** — Applied Intelligence, Systems & Digital Ventures.
+Official website for **ROUTEZERO (루트제로)** — Applied Intelligence, Design Automation & Studio Engineering.
 
-Built with a high-craft **White Editorial 2-Column Split System** (inspired by `hand-axe.com`), zero-bloat vanilla frontend architecture, Google Analytics (GA4) telemetry, and edge-ready Vercel configuration.
+Built with a high-craft **White & Emerald Green Editorial Split System** (inspired by `hand-axe.com`), zero-bloat vanilla frontend architecture, adaptive responsive mobile navigation, Google Analytics (GA4) telemetry, and edge-ready Vercel configuration.
 
 ---
 
 ## Features
 
-- **White Editorial Design System**: Crisp white typography grid (`#FFFFFF` / `#FAFAFB`), obsidian text, electric cobalt accents, and ultra-fine hairline borders.
-- **Hand-Axe 2-Column Architecture**:
-  - **Left Panel (40%)**: Sticky brand lockup, active section indicator lines, direct social links, and quick-copy contact badge.
-  - **Right Panel (60%)**: Smooth-scrolling sections including Thesis, Ventures & Products, Capabilities Matrix, Architecture Table, Insights, and Contact.
-- **Comprehensive Studio Footer**: Live Seoul (KST) real-time clock, system status indicator, quick links, business & legal metadata placeholder, and smooth back-to-top trigger.
-- **Google Analytics 4 (GA4)**: Built-in `gtag.js` script with section scroll-spy tracking, venture outbound link tracking, and email copy event telemetry.
+- **White & Emerald Editorial Design System**: Crisp typography grid (`#FFFFFF` / `#FAFAFB`), obsidian text (`#0F172A`), emerald green accents (`#059669` / `#10B981`), and subtle hairline borders.
+- **Adaptive Responsive Architecture**:
+  - **Desktop (≥ 1024px)**: 2-Column Split System with sticky brand lockup, active section indicator lines, direct social links, and quick-copy contact badge.
+  - **Mobile / Tablet (< 1024px)**: Single column with a sticky blurred chip navigation track (`backdrop-filter: blur(12px)`) and synchronized scroll-spy.
+- **Core Sections**:
+  - **Design & Automation**: Editorial grid & layout systems, creative scripting (Adobe UXP/CLI), and automated typography pipelines.
+  - **Archive**: Structured, responsive systems and project history table with live status badges.
+  - **About Routezero**: Studio vision, philosophy, and engineering approach.
+- **Studio Footer**: Live Seoul (KST) real-time clock, location metadata, quick links, and smooth back-to-top trigger.
+- **Google Analytics 4 (GA4)**: Built-in `gtag.js` script (`G-TTVJZ0V80C`) with section scroll-spy tracking, outbound link telemetry, and email copy event tracking.
 - **Vercel Edge Ready**: `vercel.json` pre-configured with clean URLs, immutable asset caching, and security headers.
 
 ---
@@ -22,14 +26,15 @@ Built with a high-craft **White Editorial 2-Column Split System** (inspired by `
 
 ```
 Routezero/
-├── index.html          # Main HTML document with SEO & GA4 tags
+├── index.html          # Main HTML document with SEO, OpenGraph & GA4 tags
 ├── styles/
-│   └── main.css        # Design tokens, grid layout, responsive breakpoints
+│   └── main.css        # Design tokens, grid layout, fluid typography & media queries
 ├── scripts/
 │   └── app.js          # Scroll-spy, KST live clock, clipboard toast, GA4 events
 ├── assets/
 │   ├── logo.svg        # Routezero vector logo & wordmark
-│   └── favicon.svg     # Modern SVG favicon
+│   ├── favicon.svg     # Modern SVG favicon
+│   └── routezero_*.png # Studio branding assets
 ├── vercel.json         # Vercel deployment configuration
 └── README.md
 ```
@@ -49,23 +54,6 @@ npx serve .
 ```
 
 Open `http://localhost:3000` in your browser.
-
----
-
-## Google Analytics (GA4) Configuration
-
-In [index.html](file:///Users/daeyounglee/Projects/Routezero/index.html), locate the `G-XXXXXXXXXX` placeholder and replace it with your actual Google Analytics Measurement ID:
-
-```html
-<!-- Google Analytics 4 (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTVJZ0V80C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TTVJZ0V80C');
-</script>
-```
 
 ---
 
