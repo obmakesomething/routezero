@@ -16,8 +16,25 @@ permissions:
 jobs:
   run-fga:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
+      - name: Wait for FGA audit slot
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 60); do
+            STATUS=$(curl --fail --silent --show-error \
+              'https://fga-demo-5wvarmkeaq-du.a.run.app/api/audit/progress')
+            echo "$STATUS"
+            BUSY=$(python -c 'import json,sys; print(str(json.loads(sys.argv[1]).get("inFlight", False)).lower())' "$STATUS")
+            if [ "$BUSY" = "false" ]; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'FGA audit slot did not become idle within 10 minutes.' >&2
+          exit 1
+
       - name: Call deployed fga-engine
         shell: bash
         run: |
@@ -33,8 +50,7 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          p = Path('artifacts/fga-bottube-response.json')
-          data = json.loads(p.read_text())
+          data = json.loads(Path('artifacts/fga-bottube-response.json').read_text())
           print(json.dumps({
               'runId': data.get('runId'),
               'status': data.get('status'),
