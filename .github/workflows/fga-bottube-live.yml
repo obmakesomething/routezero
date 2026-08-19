@@ -6,6 +6,9 @@ on:
     branches: [fga-bounty-bo-tube-run-20260820]
     paths:
       - ".github/workflows/fga-bottube-live.yml"
+  pull_request:
+    paths:
+      - ".github/workflows/fga-bottube-live.yml"
 
 permissions:
   contents: read
