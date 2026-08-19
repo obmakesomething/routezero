@@ -1,21 +1,25 @@
 /* -------------------------------------------------------------
-   ROUTEZERO EDITORIAL ESSAY THEME
-   Pure, High-Craft Literary Reading Experience
+   ROUTEZERO EDITORIAL ESSAY SYSTEM
+   High-Craft, Distortion-Free Typography & Layout Architecture
    ------------------------------------------------------------- */
 :root {
-  /* Color Tokens */
+  /* Surface & Background */
   --c-bg: #FAFAFB;
   --c-card-bg: #FFFFFF;
-  --c-text-primary: #111827;
-  --c-text-secondary: #374151;
-  --c-text-muted: #6B7280;
-  --c-text-light: #9CA3AF;
+  --c-surface-subtle: #F1F5F9;
+  
+  /* Text & Inks */
+  --c-text-title: #0F172A;
+  --c-text-body: #1E293B;
+  --c-text-secondary: #475569;
+  --c-text-muted: #64748B;
+  --c-text-light: #94A3B8;
   
   /* Brand Accent: Botanical Emerald */
   --c-accent: #059669;
   --c-accent-light: #10B981;
   --c-accent-subtle: #ECFDF5;
-  --c-accent-glow: rgba(16, 185, 129, 0.15);
+  --c-accent-glow: rgba(16, 185, 129, 0.12);
   
   /* Dividers & Borders */
   --c-border: rgba(0, 0, 0, 0.08);
@@ -26,11 +30,14 @@
   --ff-body: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   --ff-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
 
-  /* Spacing & Sizing */
-  --content-max-width: 680px;
+  /* Layout Widths */
+  --header-max-width: 1080px;
+  --reading-max-width: 720px;
 }
 
-/* Reset & Base */
+/* -------------------------------------------------------------
+   RESET & BASE STYLES
+   ------------------------------------------------------------- */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -40,7 +47,7 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--c-bg);
-  color: var(--c-text-primary);
+  color: var(--c-text-body);
   font-family: var(--ff-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -51,8 +58,8 @@ body {
   min-height: 100vh;
   width: 100%;
   background-color: var(--c-bg);
-  color: var(--c-text-primary);
-  line-height: 1.85;
+  color: var(--c-text-body);
+  line-height: 1.95;
   overflow-x: hidden;
   position: relative;
 }
@@ -62,7 +69,7 @@ body {
   color: #FFFFFF;
 }
 
-/* Background Texture */
+/* Subtle Grid Texture */
 .bg-texture {
   position: fixed;
   top: 0; 
@@ -77,7 +84,7 @@ body {
   z-index: 1;
 }
 
-/* Top Reading Progress Bar */
+/* Reading Progress Bar */
 .reading-progress-bar {
   position: fixed;
   top: 0;
@@ -85,30 +92,32 @@ body {
   height: 3px;
   width: 0%;
   background: linear-gradient(90deg, #10B981 0%, #059669 100%);
-  z-index: 100;
+  z-index: 1000;
   transition: width 0.1s linear;
 }
 
-/* Header */
+/* -------------------------------------------------------------
+   EDITORIAL HEADER (STICKY & RESPONSIVE)
+   ------------------------------------------------------------- */
 .editorial-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
   width: 100%;
-  border-bottom: 1px solid var(--c-border-subtle);
-  background: rgba(250, 250, 251, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 250, 251, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--c-border);
 }
 
 .header-inner {
-  max-width: var(--content-max-width);
+  max-width: var(--header-max-width);
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 0.85rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .brand-link {
@@ -119,7 +128,7 @@ body {
 }
 
 .brand-logo {
-  height: 26px;
+  height: 28px;
   width: auto;
   display: block;
 }
@@ -127,7 +136,7 @@ body {
 .essay-nav-links {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -139,21 +148,21 @@ body {
 .essay-nav-item {
   display: inline-flex;
   align-items: center;
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.85rem;
   border-radius: 20px;
   font-family: var(--ff-heading);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--c-text-muted);
   text-decoration: none;
   white-space: nowrap;
   border: 1px solid transparent;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .essay-nav-item:hover {
-  color: var(--c-text-primary);
-  background: var(--c-border-subtle);
+  color: var(--c-text-title);
+  background: var(--c-surface-subtle);
 }
 
 .essay-nav-item.active {
@@ -162,13 +171,15 @@ body {
   border-color: rgba(16, 185, 129, 0.3);
 }
 
-/* Main Article Wrapper */
+/* -------------------------------------------------------------
+   MAIN ESSAY CONTAINER
+   ------------------------------------------------------------- */
 .article-wrapper {
   position: relative;
   z-index: 5;
-  max-width: var(--content-max-width);
+  max-width: var(--reading-max-width);
   margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
+  padding: 4.5rem 1.5rem 6.5rem;
 }
 
 .essay-article {
@@ -176,158 +187,170 @@ body {
   flex-direction: column;
 }
 
-/* Title Group */
+/* Title & Metadata Header */
 .essay-title-group {
   margin-bottom: 3.5rem;
   border-bottom: 1px solid var(--c-border);
-  padding-bottom: 2.5rem;
+  padding-bottom: 2.25rem;
 }
 
 .essay-meta-top {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 1rem;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
   font-family: var(--ff-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
 }
 
 .essay-number {
   color: var(--c-accent);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   background: var(--c-accent-subtle);
-  padding: 0.15rem 0.5rem;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.2rem 0.6rem;
   border-radius: 4px;
 }
 
-.essay-date {
+.essay-meta-details {
   color: var(--c-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .main-title {
   font-family: var(--ff-heading);
-  font-size: clamp(2.2rem, 5.5vw, 3.25rem);
+  font-size: clamp(2.15rem, 5.5vw, 3.15rem);
   font-weight: 800;
-  line-height: 1.2;
-  color: var(--c-text-primary);
-  letter-spacing: -0.03em;
+  line-height: 1.22;
+  color: var(--c-text-title);
+  letter-spacing: -0.035em;
   margin-bottom: 1rem;
   word-break: keep-all;
 }
 
 .sub-title {
   font-family: var(--ff-heading);
-  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  font-size: clamp(1.15rem, 2.8vw, 1.4rem);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--c-text-secondary);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   word-break: keep-all;
 }
 
-/* Essay Body Typography */
+/* -------------------------------------------------------------
+   ESSAY BODY TYPOGRAPHY
+   ------------------------------------------------------------- */
 .essay-body {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
-  font-size: clamp(1.05rem, 2vw, 1.125rem);
-  color: var(--c-text-secondary);
-  letter-spacing: -0.01em;
+  gap: 1.65rem;
+  font-size: clamp(1.05rem, 1.8vw, 1.125rem);
+  color: var(--c-text-body);
+  letter-spacing: -0.012em;
 }
 
 .essay-body p {
   word-break: keep-all;
   overflow-wrap: break-word;
-  line-height: 1.9;
+  line-height: 1.95;
 }
 
 .essay-body strong {
   font-weight: 700;
-  color: var(--c-text-primary);
+  color: var(--c-text-title);
 }
 
-/* Lead & Emphasis Paragraphs */
+/* Lead, Emphasis & Callouts */
 .highlight-lead {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  color: var(--c-text-primary) !important;
-  margin: 0.75rem 0;
-  line-height: 1.7 !important;
+  color: var(--c-text-title) !important;
+  line-height: 1.75 !important;
+  margin: 0.5rem 0;
 }
 
 .emphasis-paragraph {
-  color: var(--c-text-primary) !important;
+  color: var(--c-text-title) !important;
   font-weight: 500;
 }
 
 .final-quote {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--c-text-primary) !important;
+  color: var(--c-text-title) !important;
   line-height: 1.75 !important;
-  margin-top: 1rem;
-  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  padding: 1.35rem 1.65rem;
   background: var(--c-accent-subtle);
-  border-left: 3px solid var(--c-accent);
-  border-radius: 0 8px 8px 0;
+  border-left: 3.5px solid var(--c-accent);
+  border-radius: 0 10px 10px 0;
+  border-top: 1px solid rgba(16, 185, 129, 0.15);
+  border-right: 1px solid rgba(16, 185, 129, 0.15);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.15);
 }
 
 /* Section Headings & Dividers */
 .section-heading {
   font-family: var(--ff-heading);
-  font-size: clamp(1.35rem, 3.5vw, 1.7rem);
+  font-size: clamp(1.35rem, 3.2vw, 1.65rem);
   font-weight: 700;
-  color: var(--c-text-primary);
+  color: var(--c-text-title);
   line-height: 1.35;
   letter-spacing: -0.02em;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.25rem;
   word-break: keep-all;
 }
 
 .section-divider {
   border: none;
   height: 1px;
-  background: var(--c-border);
-  margin: 2.25rem 0 1.25rem;
+  background: linear-gradient(90deg, var(--c-border) 0%, rgba(0, 0, 0, 0.02) 100%);
+  margin: 2.5rem 0 1.5rem;
 }
 
 /* Editorial Blockquote */
 .editorial-quote {
   margin: 1.5rem 0;
-  padding: 1.25rem 1.75rem;
-  background: #FFFFFF;
+  padding: 1.35rem 1.65rem;
+  background: var(--c-card-bg);
   border: 1px solid var(--c-border);
-  border-left: 3px solid var(--c-accent);
+  border-left: 3.5px solid var(--c-accent);
   border-radius: 8px;
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--c-text-primary);
-  line-height: 1.6;
+  color: var(--c-text-title);
+  line-height: 1.65;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
-/* Next / Previous Essay Card */
+/* -------------------------------------------------------------
+   NEXT / PREVIOUS ESSAY NAVIGATION CARD
+   ------------------------------------------------------------- */
 .next-essay-card {
-  margin-top: 4rem;
+  margin-top: 4.5rem;
   padding: 1.75rem 2rem;
-  background: #FFFFFF;
+  background: var(--c-card-bg);
   border: 1px solid var(--c-border);
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  transition: all 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .next-essay-card:hover {
-  border-color: rgba(16, 185, 129, 0.4);
+  border-color: rgba(16, 185, 129, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 24px var(--c-accent-glow);
 }
 
 .next-essay-meta {
   font-family: var(--ff-mono);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--c-accent);
   margin-bottom: 0.5rem;
@@ -341,9 +364,9 @@ body {
 
 .next-essay-title {
   font-family: var(--ff-heading);
-  font-size: 1.2rem;
+  font-size: 1.22rem;
   font-weight: 700;
-  color: var(--c-text-primary);
+  color: var(--c-text-title);
   margin-bottom: 0.35rem;
   transition: color 0.2s ease;
 }
@@ -358,14 +381,16 @@ body {
   line-height: 1.5;
 }
 
-/* Newsletter Box */
+/* -------------------------------------------------------------
+   NEWSLETTER SUBSCRIPTION BOX
+   ------------------------------------------------------------- */
 .newsletter-box {
   margin-top: 3.5rem;
-  padding: 2.5rem;
-  background: #FFFFFF;
+  padding: 2.25rem 2.5rem;
+  background: var(--c-card-bg);
   border: 1px solid var(--c-border);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
   position: relative;
   overflow: hidden;
 }
@@ -384,10 +409,11 @@ body {
   display: inline-block;
   font-family: var(--ff-mono);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--c-accent);
   background: var(--c-accent-subtle);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   padding: 0.2rem 0.55rem;
   border-radius: 4px;
   margin-bottom: 0.85rem;
@@ -397,9 +423,9 @@ body {
   font-family: var(--ff-heading);
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--c-text-primary);
+  color: var(--c-text-title);
   margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .newsletter-desc {
@@ -429,7 +455,7 @@ body {
   border: 1px solid var(--c-border);
   border-radius: 8px;
   background: var(--c-bg);
-  color: var(--c-text-primary);
+  color: var(--c-text-title);
   outline: none;
   transition: all 0.2s ease;
 }
@@ -441,7 +467,7 @@ body {
 }
 
 .newsletter-btn {
-  padding: 0.75rem 1.35rem;
+  padding: 0.75rem 1.4rem;
   font-family: var(--ff-heading);
   font-size: 0.92rem;
   font-weight: 600;
@@ -451,7 +477,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .newsletter-btn:hover {
@@ -477,7 +503,9 @@ body {
   color: #DC2626;
 }
 
-/* Essay Footer & Contact */
+/* -------------------------------------------------------------
+   ESSAY FOOTER & CONTACT
+   ------------------------------------------------------------- */
 .essay-footer {
   margin-top: 4rem;
   padding-top: 2.5rem;
@@ -546,14 +574,14 @@ body {
   color: var(--c-accent);
 }
 
-/* Toast */
+/* Feedback Toast */
 .copy-toast {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   color: #FFFFFF;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1.35rem;
   border-radius: 8px;
   font-size: 0.88rem;
   font-weight: 600;
@@ -570,37 +598,53 @@ body {
   opacity: 1;
 }
 
-/* Responsive Mobile Breakpoint */
+/* -------------------------------------------------------------
+   RESPONSIVE & MOBILE BREAKPOINTS
+   ------------------------------------------------------------- */
 @media (max-width: 640px) {
   .header-inner {
-    padding: 0.75rem 1.15rem;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .essay-nav-links {
+    width: 100%;
+    gap: 0.35rem;
+    padding-bottom: 0.2rem;
   }
 
   .essay-nav-item {
-    padding: 0.25rem 0.6rem;
-    font-size: 0.72rem;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.76rem;
   }
 
   .article-wrapper {
-    padding: 2.5rem 1.15rem 4.5rem;
+    padding: 2.25rem 1.15rem 4.5rem;
   }
 
   .essay-title-group {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.75rem;
+    margin-bottom: 2.25rem;
+    padding-bottom: 1.5rem;
   }
 
   .main-title {
-    font-size: 2.05rem;
+    font-size: 1.95rem;
   }
 
   .sub-title {
-    font-size: 1.12rem;
+    font-size: 1.1rem;
   }
 
   .essay-body {
     font-size: 1.02rem;
-    gap: 1.5rem;
+    gap: 1.4rem;
+  }
+
+  .section-heading {
+    font-size: 1.35rem;
+    margin-top: 1.75rem;
   }
 
   .next-essay-card {

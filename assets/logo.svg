@@ -1,20 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" width="240" height="48" fill="none">
-  <!-- Original Authentic Root Zero Mark (√O) in Obsidian & Emerald Green -->
-  <g transform="translate(0, 0)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" width="200" height="40" fill="none">
+  <!-- Route Zero Mark (√O) in Obsidian & Emerald Green -->
+  <g transform="translate(2, 4)">
     <!-- Radical Glyph -->
-    <path d="M 4 25 L 9 25 L 14.5 39 L 23.5 7 L 33 7" 
+    <path d="M 2 20 L 7 20 L 12 32 L 20 5 L 28 5" 
           stroke="#0F172A" 
-          stroke-width="3.2" 
+          stroke-width="2.8" 
           stroke-linecap="square" 
           stroke-linejoin="miter" />
     <!-- Zero (O) Glyph with Emerald Green Accent -->
-    <circle cx="34" cy="27" r="9.5" 
+    <circle cx="30" cy="21" r="8" 
             stroke="#059669" 
-            stroke-width="3" 
+            stroke-width="2.8" 
             fill="none" />
   </g>
   
   <!-- Wordmark: ROUTEZERO -->
-  <text x="58" y="31" font-family="'Outfit', 'Inter', -apple-system, sans-serif" font-weight="800" font-size="22" letter-spacing="-0.035em" fill="#0F172A">ROUTE<tspan fill="#059669">ZERO</tspan></text>
-  <text x="191" y="19" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="8.5" letter-spacing="0.08em" fill="#9CA3AF">00</text>
+  <text x="50" y="27" font-family="'Outfit', 'Pretendard', -apple-system, sans-serif" font-weight="800" font-size="20" letter-spacing="-0.03em" fill="#0F172A">ROUTE<tspan fill="#059669">ZERO</tspan></text>
 </svg>
