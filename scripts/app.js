@@ -1,107 +1,45 @@
 /**
- * ROUTEZERO CLIENT SCRIPT
- * - Scroll Spy for desktop & mobile navigation
- * - Seoul (KST) Live Clock
- * - Email clipboard copy with visual toast
- * - Ambient cursor glow (desktop pointer)
- * - Smooth scroll & Back to top
- * - GA4 event telemetry
+ * ROUTEZERO EDITORIAL CLIENT SCRIPT
+ * - Reading Progress Bar
+ * - Newsletter Subscription Form Handling
+ * - Email Copy Interaction & Feedback Toast
+ * - Smooth Back to Top
+ * - GA4 Telemetry
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initScrollSpy();
-  initLiveClock();
+  initReadingProgress();
   initEmailCopy();
-  initCursorGlow();
-  initAnalytics();
+  initNewsletter();
   initBackToTop();
 });
 
 /**
- * 1. Unified Scroll Spy for Desktop & Mobile Navigation
+ * 1. Reading Progress Bar
  */
-function initScrollSpy() {
-  const sections = document.querySelectorAll('main > section[id]');
-  const navItems = document.querySelectorAll('.nav-item, .mobile-nav-item');
+function initReadingProgress() {
+  const progressBar = document.getElementById('reading-progress');
+  if (!progressBar) return;
 
-  if (!sections.length || !navItems.length) return;
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '-20% 0px -50% 0px',
-    threshold: 0
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-
-        navItems.forEach((link) => {
-          const targetId = link.getAttribute('href')?.replace('#', '');
-          if (targetId === id) {
-            link.classList.add('active');
-            // Scroll mobile nav container if needed
-            const mobileNav = link.closest('.mobile-nav-track');
-            if (mobileNav) {
-              const linkRect = link.getBoundingClientRect();
-              const navRect = mobileNav.getBoundingClientRect();
-              if (linkRect.left < navRect.left || linkRect.right > navRect.right) {
-                link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-              }
-            }
-          } else {
-            link.classList.remove('active');
-          }
-        });
-
-        // Telemetry: Section view event
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'section_view', {
-            section_id: id
-          });
-        }
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach((section) => observer.observe(section));
-}
-
-/**
- * 2. Real-time Seoul (KST) Clock
- */
-function initLiveClock() {
-  const clockEl = document.getElementById('seoul-clock');
-  if (!clockEl) return;
-
-  function updateClock() {
-    try {
-      const now = new Date();
-      const options = {
-        timeZone: 'Asia/Seoul',
-        hour12: false,
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      };
-      const timeString = new Intl.DateTimeFormat('ko-KR', options).format(now);
-      clockEl.textContent = `SEOUL: ${timeString} KST`;
-    } catch (e) {
-      const now = new Date();
-      clockEl.textContent = `SEOUL: ${now.toTimeString().split(' ')[0]} KST`;
+  function updateProgress() {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight <= 0) {
+      progressBar.style.width = '0%';
+      return;
     }
+    const currentProgress = (window.scrollY / totalHeight) * 100;
+    progressBar.style.width = `${Math.min(100, Math.max(0, currentProgress))}%`;
   }
 
-  updateClock();
-  setInterval(updateClock, 1000);
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 }
 
 /**
- * 3. Email Copy to Clipboard Interaction
+ * 2. Email Copy Interaction
  */
 function initEmailCopy() {
-  const copyButtons = document.querySelectorAll('[data-copy-email], #email-badge, #footer-email-link');
+  const emailLink = document.getElementById('email-link');
   const toast = document.getElementById('toast');
   const emailToCopy = 'krrootzero@gmail.com';
 
@@ -111,11 +49,11 @@ function initEmailCopy() {
     toast.classList.add('show');
     setTimeout(() => {
       toast.classList.remove('show');
-    }, 2400);
+    }, 2500);
   }
 
-  copyButtons.forEach((btn) => {
-    btn.addEventListener('click', async (e) => {
+  if (emailLink) {
+    emailLink.addEventListener('click', async (e) => {
       e.preventDefault();
       try {
         await navigator.clipboard.writeText(emailToCopy);
@@ -127,92 +65,82 @@ function initEmailCopy() {
           });
         }
       } catch (err) {
-        // Fallback for older browsers
-        const textarea = document.createElement('textarea');
-        textarea.value = emailToCopy;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          showToast('이메일 주소가 복사되었습니다! (krrootzero@gmail.com)');
-        } catch (e2) {
-          window.location.href = `mailto:${emailToCopy}`;
-        }
-        document.body.removeChild(textarea);
+        window.location.href = `mailto:${emailToCopy}`;
       }
     });
-  });
-}
-
-/**
- * 4. Ambient Cursor Glow (Desktop Fine Pointers Only)
- */
-function initCursorGlow() {
-  const glow = document.getElementById('cursor-glow');
-  if (!glow) return;
-
-  if (window.matchMedia('(pointer: fine)').matches) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
-    let isInside = true;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      if (!isInside) {
-        isInside = true;
-        glow.style.opacity = '1';
-      }
-    });
-
-    document.addEventListener('mouseleave', () => {
-      isInside = false;
-      glow.style.opacity = '0';
-    });
-
-    function animate() {
-      currentX += (mouseX - currentX) * 0.08;
-      currentY += (mouseY - currentY) * 0.08;
-      glow.style.transform = `translate3d(calc(${currentX}px - 50%), calc(${currentY}px - 50%), 0)`;
-      requestAnimationFrame(animate);
-    }
-    animate();
-  } else {
-    glow.style.display = 'none';
   }
 }
 
 /**
- * 5. Outbound Links Telemetry
+ * 3. Newsletter Subscription
  */
-function initAnalytics() {
-  document.querySelectorAll('a[target="_blank"]').forEach((link) => {
-    link.addEventListener('click', () => {
-      const url = link.getAttribute('href');
-      const label = link.textContent.trim();
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'outbound_click', {
-          link_url: url,
-          link_label: label
-        });
+function initNewsletter() {
+  const form = document.getElementById('newsletter-form');
+  const emailInput = document.getElementById('newsletter-email');
+  const submitBtn = document.getElementById('newsletter-submit');
+  const feedback = document.getElementById('form-feedback');
+  const toast = document.getElementById('toast');
+
+  if (!form || !emailInput) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+
+    if (!email || !email.includes('@')) {
+      feedback.textContent = '올바른 이메일 주소를 입력해 주세요.';
+      feedback.className = 'form-feedback error';
+      return;
+    }
+
+    // Save locally for subscription tracking
+    try {
+      const subscribers = JSON.parse(localStorage.getItem('routezero_subscribers') || '[]');
+      if (!subscribers.includes(email)) {
+        subscribers.push(email);
+        localStorage.setItem('routezero_subscribers', JSON.stringify(subscribers));
       }
-    });
+    } catch (e) {
+      console.warn('Storage fallback: ', e);
+    }
+
+    // GA4 Telemetry Event
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'newsletter_signup', {
+        email_hash: email
+      });
+    }
+
+    // Success State
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>구독 완료 ✓</span>';
+    emailInput.disabled = true;
+    
+    feedback.textContent = '구독해 주셔서 감사합니다. 새로운 글이 발행되면 이메일로 전해드릴게요.';
+    feedback.className = 'form-feedback success';
+
+    if (toast) {
+      toast.textContent = '뉴스레터 구독이 완료되었습니다!';
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
   });
 }
 
 /**
- * 6. Smooth Back to Top
+ * 4. Smooth Back to Top
  */
 function initBackToTop() {
   const topBtn = document.getElementById('back-to-top');
   if (topBtn) {
     topBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
   }
 }
