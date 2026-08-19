@@ -1,0 +1,64 @@
+name: FGA BoTTube live bounty run
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [fga-bounty-bo-tube-run-20260820]
+    paths:
+      - ".github/workflows/fga-bottube-live.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  run-fga:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Call deployed fga-engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          curl --fail-with-body --silent --show-error \
+            --max-time 840 \
+            -X POST 'https://fga-demo-5wvarmkeaq-du.a.run.app/api/audit' \
+            -H 'content-type: application/json' \
+            --data '{"url":"https://bottube.ai/"}' \
+            | tee artifacts/fga-bottube-response.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('artifacts/fga-bottube-response.json')
+          data = json.loads(p.read_text())
+          print(json.dumps({
+              'runId': data.get('runId'),
+              'status': data.get('status'),
+              'pageCount': data.get('pageCount'),
+              'findingCount': data.get('findingCount'),
+              'failCount': data.get('failCount'),
+              'reviewCount': data.get('reviewCount'),
+              'reportUrl': data.get('reportUrl'),
+              'claimBoundary': data.get('claimBoundary'),
+          }, indent=2))
+          if data.get('error'):
+              raise SystemExit(data['error'])
+          PY
+
+      - name: Fetch FGA report HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_ID=$(python -c 'import json; print(json.load(open("artifacts/fga-bottube-response.json"))["runId"])')
+          curl --fail-with-body --silent --show-error \
+            "https://fga-demo-5wvarmkeaq-du.a.run.app/reports/${RUN_ID}/report.html" \
+            -o artifacts/fga-bottube-report.html
+
+      - name: Upload exact FGA evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fga-bottube-live-evidence
+          path: artifacts/
+          if-no-files-found: warn
