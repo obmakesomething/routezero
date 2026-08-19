@@ -586,27 +586,34 @@ body {
 /* -------------------------------------------------------------
    RESPONSIVE & MOBILE BREAKPOINTS
    ------------------------------------------------------------- */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .header-inner {
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.15rem;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.65rem;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .brand-link {
+    align-self: flex-start;
   }
 
   .essay-nav-links {
     width: 100%;
-    gap: 0.35rem;
-    padding-bottom: 0.2rem;
+    display: flex;
+    gap: 0.4rem;
   }
 
   .essay-nav-item {
-    padding: 0.3rem 0.65rem;
-    font-size: 0.76rem;
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.78rem;
   }
 
   .article-wrapper {
-    padding: 2.25rem 1.15rem 4.5rem;
+    padding: 2.5rem 1.15rem 4.5rem;
   }
 
   .essay-title-group {
@@ -633,12 +640,12 @@ body {
   }
 
   .next-essay-card {
-    padding: 1.25rem 1.25rem;
+    padding: 1.35rem 1.25rem;
     margin-top: 3rem;
   }
 
   .newsletter-box {
-    padding: 1.5rem 1.25rem;
+    padding: 1.65rem 1.25rem;
     margin-top: 2.5rem;
   }
 
